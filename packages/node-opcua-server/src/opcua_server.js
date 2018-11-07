@@ -135,6 +135,7 @@ const OPCUABaseServer = require("./base_server").OPCUABaseServer;
 const exploreCertificate = require("node-opcua-crypto").exploreCertificate;
 const computeSignature = require("node-opcua-secure-channel").computeSignature;
 const verifySignature = require("node-opcua-secure-channel").verifySignature;
+const checkCertificateValidity = require("node-opcua-secure-channel").checkCertificateValidity;
 
 
 const Factory = function Factory(engine) {
@@ -1247,9 +1248,16 @@ OPCUAServer.prototype.isValidX509IdentityToken = function (
 
     // verify if certificate is Valid
     // todo:
+    // verify if the certificate is revoked
+    // todo: StatusCode.BadCertificateRevoked
+    const certificateStatus = checkCertificateValidity(certificate);
+
+    if (StatusCodes.Good !== certificateStatus) {
+        return certificateStatus;
+    }
 
     // verify if certificate is truster or rejected
-    // todo:
+    // todo: StatusCode.BadCertificateUntrusted
 
     // store untrusted certificate to rejected folder
     // todo:
