@@ -83,6 +83,7 @@ script:
     then  npm test ;
     else  npm test;
     fi
+  - lerna run test-typescript
 
 addons:
   code_climate:

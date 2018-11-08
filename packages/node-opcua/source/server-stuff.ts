@@ -199,6 +199,9 @@ export declare interface OPCUAServerEndPoint {
     endpointDescriptions(): EndpointDescription[];
 }
 
+export * from "node-opcua-certificate-manager";
+import { CertificateManager } from "node-opcua-certificate-manager";
+
 export declare class OPCUAServer {
 
     public bytesWritten: number;
@@ -209,6 +212,11 @@ export declare class OPCUAServer {
     public sessionAbortCount: number;
     public publishingIntervalCount: number;
     public sessionTimeoutCount: number;
+
+
+    public userCertificateManager: CertificateManager;
+    public certificateManager: CertificateManager;
+
     /**
      * the number of connected channel on all existing end points
      */
@@ -251,4 +259,3 @@ export interface Subscription {
 export interface MonitoredItem {
 
 }
-
